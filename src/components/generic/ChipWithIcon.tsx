@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: 4,
-    paddingHorizontal: 8,
+    paddingVertical: 6,
+    paddingHorizontal: 10,
     borderRadius: 8,
     alignContent: 'center',
     alignSelf: 'flex-start',
@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     color: colors.generalFontColor,
     ...GlobalTextStyles.labelLarge,
     marginRight: 4,
+    textAlignVertical: 'center',
   },
   icon: {
     justifyContent: 'center',
