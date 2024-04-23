@@ -1,15 +1,16 @@
 import {PlaceType} from '../api/types.ts';
 
 export const mockedIgnoredPlaces: PlaceType[] = [
-  {id: '1', title: 'Парки'},
-  {id: '2', title: 'Храмы'},
+  {id: 'movie_theater', translationRu: 'Кинотеатр'},
+  {id: 'night_club', translationRu: 'Ночной клуб'},
 ];
 
 export const mockedPriorityPlaces: PlaceType[] = [
-  {id: '3', title: 'Зоопарки'},
+  {id: 'zoo', translationRu: 'Зоопарк'},
+  {id: 'amusement_park', translationRu: 'Парк развлечений'},
   {
-    id: '4',
-    title: 'Парки развлечений',
+    id: 'tourist_attraction',
+    translationRu: 'Достопримечательность',
   },
-  {id: '5', title: 'Театры'},
+  {id: 'campground', translationRu: 'Кемпинг'},
 ];

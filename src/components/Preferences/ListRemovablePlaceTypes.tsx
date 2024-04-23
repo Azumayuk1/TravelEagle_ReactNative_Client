@@ -19,7 +19,7 @@ const ListRemovablePlaceTypes: FC<Props> = ({
   const renderItem = ({item}: {item: PlaceType}) => {
     return (
       <ChipWithIcon
-        text={item.title}
+        text={item.translationRu}
         onPress={() => onRemovePlacePressed(item)}
         icon={<IconClose />}
         style={styles.chip}

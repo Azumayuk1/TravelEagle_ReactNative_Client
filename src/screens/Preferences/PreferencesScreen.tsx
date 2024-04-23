@@ -7,11 +7,8 @@ import TransportationSelector from '../../components/Preferences/TransportationS
 import ChipWithIcon from '../../components/generic/ChipWithIcon.tsx';
 import IconPlus from '../../components/icons/IconPlus.tsx';
 import ListRemovablePlaceTypes from '../../components/Preferences/ListRemovablePlaceTypes.tsx';
-import {
-  mockedIgnoredPlaces,
-  mockedPriorityPlaces,
-} from '../../mockedData/Preferences.ts';
-import {PlaceType} from '../../api/types.ts';
+import {entertainment, PlaceType} from '../../api/types.ts';
+import ModalAddPlacesToCategory from '../../components/Preferences/ModalAddPlacesToCategory.tsx';
 
 const PreferencesScreen: FC = () => {
   const [transportationModeByCarSelected, setTransportationModeByCarSelected] =
@@ -22,17 +19,57 @@ const PreferencesScreen: FC = () => {
     {label: 'Транспорт', value: 2},
   ];
 
-  const [ignoredPlaces, setIgnoredPlaces] = useState(mockedIgnoredPlaces);
-  const [preferredPlaces, setPreferredPlaces] = useState(mockedPriorityPlaces);
+  // Stores all available place types. If one place type is added to ignored/preferred list,
+  // it gets removed from this one.
+  const [allAvailablePlaceTypes, setAllAvailablePlaceTypes] =
+    useState(entertainment);
+
+  const [ignoredPlaces, setIgnoredPlaces] = useState<PlaceType[]>([]);
+  const [modalVisibleIgnoredPlaces, setModalVisibleIgnoredPlaces] =
+    useState(false);
+
+  const [preferredPlaces, setPreferredPlaces] = useState<PlaceType[]>([]);
+  const [modalVisiblePreferredPlaces, setModalVisiblePreferredPlaces] =
+    useState(false);
+
+  const onAddIgnoredPlace = (placeType: PlaceType) => {
+    const newAvailablePlacesList = allAvailablePlaceTypes.slice(0);
+    setAllAvailablePlaceTypes(
+      newAvailablePlacesList.filter(value => value.id !== placeType.id),
+    );
+
+    const newIgnoredPlaces = ignoredPlaces.slice(0);
+    newIgnoredPlaces.push(placeType);
+    setIgnoredPlaces(newIgnoredPlaces);
+  };
 
   const onRemoveIgnoredPlace = (placeType: PlaceType) => {
+    const newAvailablePlacesList = allAvailablePlaceTypes.slice(0);
+    newAvailablePlacesList.push(placeType);
+    setAllAvailablePlaceTypes(newAvailablePlacesList);
+
     const newIgnoredPlaces = ignoredPlaces.slice(0);
     setIgnoredPlaces(
       newIgnoredPlaces.filter(value => value.id !== placeType.id),
     );
   };
 
+  const onAddPreferredPlace = (placeType: PlaceType) => {
+    const newAvailablePlacesList = allAvailablePlaceTypes.slice(0);
+    setAllAvailablePlaceTypes(
+      newAvailablePlacesList.filter(value => value.id !== placeType.id),
+    );
+
+    const newPreferredPlaces = preferredPlaces.slice(0);
+    newPreferredPlaces.push(placeType);
+    setPreferredPlaces(newPreferredPlaces);
+  };
+
   const onRemovePreferredPlace = (placeType: PlaceType) => {
+    const newAvailablePlacesList = allAvailablePlaceTypes.slice(0);
+    newAvailablePlacesList.push(placeType);
+    setAllAvailablePlaceTypes(newAvailablePlacesList);
+
     const newPreferredPlaces = preferredPlaces.slice(0);
     setPreferredPlaces(
       newPreferredPlaces.filter(value => value.id !== placeType.id),
@@ -55,7 +92,7 @@ const PreferencesScreen: FC = () => {
       <View style={styles.dislikesSection}>
         <ChipWithIcon
           text={'Добавить игнорируемые места'}
-          onPress={() => {}}
+          onPress={() => setModalVisibleIgnoredPlaces(true)}
           icon={<IconPlus />}
           filled={true}
         />
@@ -69,7 +106,7 @@ const PreferencesScreen: FC = () => {
       <View style={styles.likesSection}>
         <ChipWithIcon
           text={'Добавить интересные места'}
-          onPress={() => {}}
+          onPress={() => setModalVisiblePreferredPlaces(true)}
           icon={<IconPlus />}
           filled={true}
         />
@@ -78,6 +115,22 @@ const PreferencesScreen: FC = () => {
           onRemovePlacePressed={onRemovePreferredPlace}
         />
       </View>
+
+      <ModalAddPlacesToCategory
+        isVisible={modalVisibleIgnoredPlaces}
+        onCloseRequested={() => setModalVisibleIgnoredPlaces(false)}
+        placeTypesList={allAvailablePlaceTypes}
+        onAddPlaceType={onAddIgnoredPlace}
+        title={'Добавьте неинтересные места'}
+      />
+
+      <ModalAddPlacesToCategory
+        isVisible={modalVisiblePreferredPlaces}
+        onCloseRequested={() => setModalVisiblePreferredPlaces(false)}
+        placeTypesList={allAvailablePlaceTypes}
+        onAddPlaceType={onAddPreferredPlace}
+        title={'Добавьте наиболее интересные места'}
+      />
     </SafeAreaView>
   );
 };

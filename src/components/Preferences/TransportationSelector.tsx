@@ -27,9 +27,9 @@ const TransportationSelector: FC<Props> = ({
             setTransportationModeSelected(false);
           }
         }}
-        selectedColor={colors.secondaryContainer}
-        buttonColor={colors.primary}
-        borderColor={colors.secondaryContainer}
+        selectedColor={colors.generalFontColor}
+        buttonColor={colors.secondaryContainer}
+        borderColor={colors.surfaceContainer}
         hasPadding
         options={switchOptions}
         borderRadius={24}
@@ -41,7 +41,7 @@ const TransportationSelector: FC<Props> = ({
 
 const styles = StyleSheet.create({
   viewModeContainer: {
-    marginTop: 12,
+    marginTop: 0,
   },
   switchText: {
     ...GlobalTextStyles.labelMedium,
