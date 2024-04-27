@@ -10,10 +10,11 @@ interface IProps {
   onChangeText: (value: string) => void;
   containerStyle?: any;
   placeholderText: string;
+  onSubmit?: () => void;
 }
 
 const GenericSearchBar: FC<IProps> = props => {
-  const {onChangeText, placeholderText} = props;
+  const {onChangeText, placeholderText, onSubmit} = props;
   const ref = useRef<TextInput>(null);
   const [isFocused, setIsFocused] = useState(false);
   const [value, setValue] = useState(props.value);
@@ -49,6 +50,7 @@ const GenericSearchBar: FC<IProps> = props => {
             setValue(newValue);
             onChangeText && onChangeText(newValue);
           }}
+          onSubmitEditing={onSubmit}
         />
         {value && (
           <TouchableOpacity onPress={clear}>

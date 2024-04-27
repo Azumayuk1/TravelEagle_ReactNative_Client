@@ -7,8 +7,9 @@ import TransportationSelector from '../../components/Preferences/TransportationS
 import ChipWithIcon from '../../components/generic/ChipWithIcon.tsx';
 import IconPlus from '../../components/icons/IconPlus.tsx';
 import ListRemovablePlaceTypes from '../../components/Preferences/ListRemovablePlaceTypes.tsx';
-import {entertainment, PlaceType} from '../../api/types.ts';
 import ModalAddPlacesToCategory from '../../components/Preferences/ModalAddPlacesToCategory.tsx';
+import {entertainment} from '../../api/placeTypesDefinitions.ts';
+import {PlaceType} from '../../api/types.ts';
 
 const PreferencesScreen: FC = () => {
   const [transportationModeByCarSelected, setTransportationModeByCarSelected] =

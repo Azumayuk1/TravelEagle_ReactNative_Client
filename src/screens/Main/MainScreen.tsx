@@ -1,5 +1,5 @@
 import {FC, useEffect, useState} from 'react';
-import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import GenericSearchBar from '../../components/generic/GenericSearchBar.tsx';
 import {colors} from '../../globalStyles/globalColors.tsx';
 import ChipWithIcon from '../../components/generic/ChipWithIcon.tsx';
@@ -20,9 +20,29 @@ import {
   mockedCitySuggestions2,
 } from '../../mockedData/mockedCitySuggestions.ts';
 import {GlobalTextStyles} from '../../globalStyles/globalTextStyles.ts';
+import useTravelEagleRoute from '../../api/useTravelEagleRoute.ts';
+import {useNavigation} from '@react-navigation/native';
+import {MainStackScreens} from '../../navigation/NavigationScreens.ts';
 
 const MainScreen: FC = () => {
-  const [searchText, setSearchText] = useState('');
+  const navigation = useNavigation();
+
+  const [searchText, setSearchText] = useState('Санкт-Петербург');
+
+  const response = useTravelEagleRoute('Санкт-Петербург', '', '');
+
+  // Debug
+  // useEffect(() => {
+  //   console.log('--- Response ---');
+  //   console.log('Weather alert:', response.route?.weatherWarning);
+  //   response.route?.tripDays.forEach(tripDay => {
+  //     console.log('>');
+  //     tripDay.destinations.forEach(destination => {
+  //       console.log(`Destination: ${destination.place.name}`);
+  //     });
+  //     console.log('<');
+  //   });
+  // }, [response]);
 
   // Calender
   const [calendarModalVisible, setCalendarModalVisible] = useState(false);
@@ -30,7 +50,7 @@ const MainScreen: FC = () => {
 
   const currentDate = new Date();
 
-  const currentDateString = formatDate(currentDate); //`${currentDate.getFullYear()}-${currentDate.getMonth()}-${currentDate.getDay()}`;
+  const currentDateString = formatDate(currentDate);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
@@ -69,12 +89,23 @@ const MainScreen: FC = () => {
     setUserSelectedDates(true);
   };
 
+  // Search and navigation
+  const onSubmitSearch = () => {
+    // TODO: Search
+    // @ts-ignore
+    navigation.navigate(MainStackScreens.RouteScreen, {
+      destinationName: searchText,
+      isSaved: false,
+    });
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <GenericSearchBar
         value={searchText}
         onChangeText={setSearchText}
         placeholderText={'Поиск в TravelEagle'}
+        onSubmit={onSubmitSearch}
       />
       <View style={styles.dateChips}>
         <ChipWithIcon
@@ -109,12 +140,6 @@ const MainScreen: FC = () => {
       <CitySuggestionBlock
         citySuggestionsList={mockedCitySuggestions2}
         title={'Недалеко от вас'}
-      />
-
-      <Image
-        source={{
-          uri: 'https://tripplanet.ru/wp-content/uploads/europe/russia/st-petersburg/dostoprimechatelnosti-sankt-peterburga.jpg',
-        }}
       />
 
       <DateRangeCalendar

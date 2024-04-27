@@ -9,4 +9,5 @@ export const colors = {
   tertiaryContainer: '#E3DFFF',
   primary: '#116682',
   error: '#BA1A1A',
+  secondary: '#4D616C',
 };

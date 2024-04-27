@@ -25,6 +25,12 @@ export const GlobalTextStyles = StyleSheet.create({
     letterSpacing: 0,
     fontWeight: 'normal',
   },
+  bodyMedium: {
+    fontSize: 14,
+    lineHeight: 20,
+    letterSpacing: 0.25,
+    fontWeight: 'normal',
+  },
   bodyLarge: {
     fontSize: 16,
     lineHeight: 24,

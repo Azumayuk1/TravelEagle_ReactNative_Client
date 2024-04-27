@@ -1,0 +1,242 @@
+{
+  "weatherWarning": "Ожидается облачная погода без осадков.",
+  "tripDays": [
+    {
+      "destinations": [
+        {
+          "place": {
+            "placeId": "1",
+            "name": "Новая Голландия",
+            "type": "park",
+            "imageUrl": "https://example.com/novaya-gollandiya.jpg",
+            "userRating": 4.6,
+            "userReviews": 1800,
+            "likes": 1300,
+            "website": "https://newholland.spb.ru/",
+            "description": "Исторический парк в центре Санкт-Петербурга."
+          },
+          "eatery": {
+            "placeId": "2",
+            "name": "Мясо & Вино",
+            "type": "cafe",
+            "imageUrl": "https://example.com/myaso-i-vino.jpg",
+            "userRating": 4.4,
+            "userReviews": 1200,
+            "likes": 800,
+            "website": "https://myasoinvino.ru/",
+            "description": "Современная кухня и богатый выбор вин."
+          },
+          "travelTime": "25 минут"
+        },
+        {
+          "place": {
+            "placeId": "3",
+            "name": "Мариинский театр",
+            "type": "theatre",
+            "imageUrl": "https://example.com/mariinsky-theatre.jpg",
+            "userRating": 4.8,
+            "userReviews": 2500,
+            "likes": 2000,
+            "website": "https://www.mariinsky.ru/",
+            "description": "Известный театр оперы и балета."
+          },
+          "eatery": {
+            "placeId": "4",
+            "name": "Кофеин",
+            "type": "cafe",
+            "imageUrl": "https://example.com/cofein.jpg",
+            "userRating": 4.5,
+            "userReviews": 1000,
+            "likes": 700,
+            "website": "https://cofein.ru/",
+            "description": "Кафе с отличным кофе и десертами."
+          },
+          "travelTime": "15 минут"
+        },
+        {
+          "place": {
+            "placeId": "5",
+            "name": "Исаакиевский собор",
+            "type": "church",
+            "imageUrl": "https://example.com/isaac-cathedral.jpg",
+            "userRating": 4.9,
+            "userReviews": 3000,
+            "likes": 2500,
+            "website": "https://www.isaac-cathedral.ru/",
+            "description": "Памятник архитектуры в центре города."
+          },
+          "eatery": {
+            "placeId": "6",
+            "name": "Шоколадница",
+            "type": "cafe",
+            "imageUrl": "https://example.com/shokoladnitsa.jpg",
+            "userRating": 4.3,
+            "userReviews": 1500,
+            "likes": 1000,
+            "website": "https://www.shoko.ru/",
+            "description": "Сеть кафе с разнообразным меню и кондитерскими изделиями."
+          },
+          "travelTime": "20 минут"
+        }
+      ]
+    },
+    {
+      "destinations": [
+        {
+          "place": {
+            "placeId": "7",
+            "name": "Эрмитаж",
+            "type": "museum",
+            "imageUrl": "https://example.com/hermitage.jpg",
+            "userRating": 4.7,
+            "userReviews": 2200,
+            "likes": 1800,
+            "website": "https://www.hermitagemuseum.org/",
+            "description": "Один из крупнейших музеев мира с богатой коллекцией."
+          },
+          "eatery": {
+            "placeId": "8",
+            "name": "Бар «Биржа»",
+            "type": "bar",
+            "imageUrl": "https://example.com/birzha-bar.jpg",
+            "userRating": 4.5,
+            "userReviews": 1400,
+            "likes": 1000,
+            "website": "https://birzhabar.ru/",
+            "description": "Бар с авторскими коктейлями и дегустациями."
+          },
+          "travelTime": "20 минут"
+        },
+        {
+          "place": {
+            "placeId": "9",
+            "name": "Петропавловская крепость",
+            "type": "tourist_attraction",
+            "imageUrl": "https://example.com/peter-and-paul-fortress.jpg",
+            "userRating": 4.8,
+            "userReviews": 2800,
+            "likes": 2300,
+            "website": "https://www.spbmuseum.ru/",
+            "description": "Историческая крепость на Заячьем острове."
+          },
+          "eatery": {
+            "placeId": "10",
+            "name": "Ресторан «Ботаника»",
+            "type": "restaurant",
+            "imageUrl": "https://example.com/botanika-restaurant.jpg",
+            "userRating": 4.6,
+            "userReviews": 1600,
+            "likes": 1200,
+            "website": "https://botanikarestaurant.ru/",
+            "description": "Ресторан с современной русской кухней."
+          },
+          "travelTime": "30 минут"
+        },
+        {
+          "place": {
+            "placeId": "11",
+            "name": "Адмиралтейство",
+            "type": "tourist_attraction",
+            "imageUrl": "https://example.com/admiralty.jpg",
+            "userRating": 4.7,
+            "userReviews": 2000,
+            "likes": 1700,
+            "website": "https://www.admiralty.com/",
+            "description": "Историческое здание на Дворцовой площади."
+          },
+          "eatery": {
+            "placeId": "12",
+            "name": "Кафе «Старый Театр»",
+            "type": "cafe",
+            "imageUrl": "https://example.com/staroy-teatr-cafe.jpg",
+            "userRating": 4.4,
+            "userReviews": 1200,
+            "likes": 900,
+            "website": "https://staroyteatr.ru/",
+            "description": "Кафе с атмосферой старой Санкт-Петербургской улицы."
+          },
+          "travelTime": "25 минут"
+        }
+      ]
+    },
+    {
+      "destinations": [
+        {
+          "place": {
+            "placeId": "13",
+            "name": "Петергоф",
+            "type": "park",
+            "imageUrl": "https://example.com/peterhof.jpg",
+            "userRating": 4.9,
+            "userReviews": 3200,
+            "likes": 2700,
+            "website": "https://www.peterhofmuseum.ru/",
+            "description": "Царское село с прекрасными фонтанами и парками."
+          },
+          "eatery": {
+            "placeId": "14",
+            "name": "Ресторан «Гранд Петергоф»",
+            "type": "restaurant",
+            "imageUrl": "https://example.com/grand-peterhof-restaurant.jpg",
+            "userRating": 4.7,
+            "userReviews": 1900,
+            "likes": 1500,
+            "website": "https://grandpeterhof.ru/",
+            "description": "Изысканная кухня с видом на фонтаны."
+          },
+          "travelTime": "40 минут"
+        },
+        {
+          "place": {
+            "placeId": "15",
+            "name": "Петропавловский собор",
+            "type": "church",
+            "imageUrl": "https://example.com/peter-and-paul-cathedral.jpg",
+            "userRating": 4.8,
+            "userReviews": 2500,
+            "likes": 2100,
+            "website": "https://www.spbmuseum.ru/",
+            "description": "Исторический собор в центре крепости."
+          },
+          "eatery": {
+            "placeId": "16",
+            "name": "Кафе «Кукуруза»",
+            "type": "cafe",
+            "imageUrl": "https://example.com/kukuruza-cafe.jpg",
+            "userRating": 4.6,
+            "userReviews": 1700,
+            "likes": 1300,
+            "website": "https://kukuruza-cafe.ru/",
+            "description": "Кафе с быстрым питанием и свежей выпечкой."
+          },
+          "travelTime": "35 минут"
+        },
+        {
+          "place": {
+            "placeId": "17",
+            "name": "Эрмитажный театр",
+            "type": "theatre",
+            "imageUrl": "https://example.com/hermitage-theatre.jpg",
+            "userRating": 4.7,
+            "userReviews": 2200,
+            "likes": 1800,
+            "website": "https://www.hermitagemuseum.org/",
+            "description": "Театр в составе Эрмитажа с богатой историей."
+          },
+          "eatery": {
+            "placeId": "18",
+            "name": "Бистро «Ла Примавера»",
+            "type": "restaurant",
+            "imageUrl": "https://example.com/la-primavera-bistro.jpg",
+            "userRating": 4.5,
+            "userReviews": 1400,
+            "likes": 1000,
+            "website": "https://laprimavera.ru/",
+            "description": "Итальянская кухня в уютной обстановке."
+          },
+          "travelTime": "30 минут"
+        }
+      ]
+    }
+  ]
+}
