@@ -4,33 +4,35 @@ import mockedJsonResponse from '../mockedData/mockedResponseSaintPetersburg.json
 
 const useTravelEagleRoute = (
   city: string,
-  startDate: string,
-  endDate: string,
+  startDate?: string,
+  endDate?: string,
 ) => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isRouteLoading, setIsRouteLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | undefined>();
-  const [route, setRoute] = useState<RouteResponse | undefined>(undefined);
+  const [routeInfo, setRouteInfo] = useState<RouteResponse | undefined>(
+    undefined,
+  );
 
   useEffect(() => {
     const fetchRoute = async () => {
       try {
         // Mocked response
-        setIsLoading(true);
-        await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate 1 second delay
+        setIsRouteLoading(true);
+        await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate 2 seconds delay
         // TODO: Real data
-        setRoute(mockedJsonResponse);
-        setIsLoading(false);
+        setRouteInfo(mockedJsonResponse);
       } catch (error) {
         setError(`Ошибка: ${error}`);
         console.log('Error:', error);
-        setIsLoading(false);
+      } finally {
+        setIsRouteLoading(false);
       }
     };
 
     fetchRoute();
   }, [city, startDate, endDate]);
 
-  return {loading: isLoading, error, route};
+  return {isRouteLoading, error, routeInfo};
 };
 
 export default useTravelEagleRoute;

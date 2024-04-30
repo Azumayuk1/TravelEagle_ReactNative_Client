@@ -8,13 +8,23 @@ import CitySuggestionItem from './CitySuggestion.tsx';
 interface Props {
   title: string;
   citySuggestionsList: CitySuggestion[];
+  onCityCardPressed: (citySuggestion: CitySuggestion) => void;
 }
 
 const keyExtractor = (item: CitySuggestion) => item.cityName;
 
-const CitySuggestionBlock: FC<Props> = ({title, citySuggestionsList}) => {
+const CitySuggestionBlock: FC<Props> = ({
+  title,
+  citySuggestionsList,
+  onCityCardPressed,
+}) => {
   const renderItem = ({item}: {item: CitySuggestion}) => {
-    return <CitySuggestionItem suggestion={item} onPress={() => {}} />;
+    return (
+      <CitySuggestionItem
+        suggestion={item}
+        onPress={() => onCityCardPressed(item)}
+      />
+    );
   };
 
   return (

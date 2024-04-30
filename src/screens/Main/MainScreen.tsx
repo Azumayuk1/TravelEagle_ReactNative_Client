@@ -20,16 +20,14 @@ import {
   mockedCitySuggestions2,
 } from '../../mockedData/mockedCitySuggestions.ts';
 import {GlobalTextStyles} from '../../globalStyles/globalTextStyles.ts';
-import useTravelEagleRoute from '../../api/useTravelEagleRoute.ts';
 import {useNavigation} from '@react-navigation/native';
 import {MainStackScreens} from '../../navigation/NavigationScreens.ts';
+import {CitySuggestion} from '../../dataTypes/citySuggestions.ts';
 
 const MainScreen: FC = () => {
   const navigation = useNavigation();
 
   const [searchText, setSearchText] = useState('Санкт-Петербург');
-
-  const response = useTravelEagleRoute('Санкт-Петербург', '', '');
 
   // Debug
   // useEffect(() => {
@@ -51,8 +49,12 @@ const MainScreen: FC = () => {
   const currentDate = new Date();
 
   const currentDateString = formatDate(currentDate);
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
+
+  const [startDate, setStartDate] = useState<Date>();
+  const [startDateText, setStartDateText] = useState('');
+
+  const [endDate, setEndDate] = useState<Date>();
+  const [endDateText, setEndDateText] = useState('');
 
   const [markedDates, setMarkedDates] = useState<any>(
     getMarkedDates(currentDateString),
@@ -61,27 +63,35 @@ const MainScreen: FC = () => {
   const onDayPressed = (dateData: DateData) => {
     const date = convertDateDataToDate(dateData);
 
-    if (startDate && endDate) {
-      setStartDate('');
-      setEndDate('');
+    // Deleting previous set dates
+    if (startDateText && endDateText) {
+      setStartDate(undefined);
+      setStartDateText('');
+
+      setEndDate(undefined);
+      setEndDateText('');
     }
 
-    if (!startDate) {
+    if (!startDateText) {
       console.log('Setting start date');
-      setStartDate(formatDate(date!!));
+      setStartDate(date);
+      setStartDateText(formatDate(date!!));
     } else {
       console.log('Setting end date');
-      setEndDate(formatDate(date!!));
+      setEndDate(date);
+      setEndDateText(formatDate(date!!));
     }
   };
 
   useEffect(() => {
-    if (startDate && endDate) {
-      setMarkedDates(getMarkedDates(currentDateString, startDate, endDate));
-    } else if (startDate) {
-      setMarkedDates(getMarkedDates(currentDateString, startDate));
+    if (startDateText && endDateText) {
+      setMarkedDates(
+        getMarkedDates(currentDateString, startDateText, endDateText),
+      );
+    } else if (startDateText) {
+      setMarkedDates(getMarkedDates(currentDateString, startDateText));
     }
-  }, [startDate, endDate]);
+  }, [startDateText, endDateText]);
 
   const onDatesSelected = () => {
     //TODO: handle dates
@@ -91,11 +101,22 @@ const MainScreen: FC = () => {
 
   // Search and navigation
   const onSubmitSearch = () => {
-    // TODO: Search
     // @ts-ignore
     navigation.navigate(MainStackScreens.RouteScreen, {
       destinationName: searchText,
       isSaved: false,
+      startDate: startDate,
+      endDate: endDate,
+    });
+  };
+
+  const onCitySuggestionPressed = (citySuggestion: CitySuggestion) => {
+    // @ts-ignore
+    navigation.navigate(MainStackScreens.RouteScreen, {
+      destinationName: citySuggestion.cityName,
+      isSaved: false,
+      startDate: startDate,
+      endDate: endDate,
     });
   };
 
@@ -117,9 +138,9 @@ const MainScreen: FC = () => {
         {userSelectedDates && (
           <ChipWithIcon
             text={
-              getShortDate(convertCalendarDateStringToDate(startDate)) +
+              getShortDate(convertCalendarDateStringToDate(startDateText)) +
               ' - ' +
-              getShortDate(convertCalendarDateStringToDate(endDate))
+              getShortDate(convertCalendarDateStringToDate(endDateText))
             }
             onPress={() => setUserSelectedDates(false)}
             icon={<IconClose />}
@@ -133,6 +154,7 @@ const MainScreen: FC = () => {
       <CitySuggestionBlock
         citySuggestionsList={mockedCitySuggestions}
         title={'Может быть...'}
+        onCityCardPressed={onCitySuggestionPressed}
       />
 
       <View style={{height: 16}}></View>
@@ -140,6 +162,7 @@ const MainScreen: FC = () => {
       <CitySuggestionBlock
         citySuggestionsList={mockedCitySuggestions2}
         title={'Недалеко от вас'}
+        onCityCardPressed={onCitySuggestionPressed}
       />
 
       <DateRangeCalendar

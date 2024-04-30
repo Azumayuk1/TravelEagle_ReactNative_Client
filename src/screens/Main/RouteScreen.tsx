@@ -2,13 +2,16 @@ import {FC, useEffect} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet} from 'react-native';
 import {colors} from '../../globalStyles/globalColors.tsx';
 import {RouteScreenNavProps} from '../../navigation/stacks/Main/MainStack.tsx';
-import {mockedResponseSaintPetersburg} from '../../mockedData/mockedApi.ts';
 import RouteFull from '../../components/Route/RouteFull.tsx';
 import {MainStackScreens} from '../../navigation/NavigationScreens.ts';
 import {Place} from '../../api/types.ts';
+import useTravelEagleRoute from '../../api/useTravelEagleRoute.ts';
+import RoutePlaceholder from '../../components/Route/RoutePlaceholder.tsx';
 
 const RouteScreen: FC<RouteScreenNavProps> = ({route, navigation}) => {
-  const {destinationName, isSaved} = route.params;
+  const {destinationName, isSaved, dateStart, dateEnd} = route.params;
+
+  const {routeInfo, isRouteLoading} = useTravelEagleRoute(destinationName);
 
   // Setting the city name in the header
   useEffect(() => {
@@ -25,10 +28,14 @@ const RouteScreen: FC<RouteScreenNavProps> = ({route, navigation}) => {
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <RouteFull
-          route={mockedResponseSaintPetersburg}
-          onPlacePressed={navigateToPlaceDetails}
-        />
+        {isRouteLoading ? (
+          <RoutePlaceholder />
+        ) : (
+          <RouteFull
+            route={routeInfo!!}
+            onPlacePressed={navigateToPlaceDetails}
+          />
+        )}
       </ScrollView>
     </SafeAreaView>
   );

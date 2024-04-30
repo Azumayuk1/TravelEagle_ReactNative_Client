@@ -3,6 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {colors} from '../../globalStyles/globalColors.tsx';
 import {GlobalTextStyles} from '../../globalStyles/globalTextStyles.ts';
 import ListDivider from '../Preferences/ListDivider.tsx';
+import IconRoute from '../icons/IconRoute.tsx';
 
 interface Props {
   travelTime?: string;
@@ -14,6 +15,7 @@ const TripTimeDivider: FC<Props> = ({travelTime}) => {
       <>
         <ListDivider />
         <View style={styles.container}>
+          <IconRoute />
           <Text style={styles.text}>{'Время в пути ~ ' + travelTime}</Text>
         </View>
       </>
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     height: 32,
     backgroundColor: colors.lightSurface,
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     borderColor: colors.secondaryContainer,
     borderWidth: 1,
     paddingVertical: 4,
@@ -39,6 +41,7 @@ const styles = StyleSheet.create({
   text: {
     ...GlobalTextStyles.labelMedium,
     color: colors.secondary,
+    marginLeft: 6,
   },
 });
 

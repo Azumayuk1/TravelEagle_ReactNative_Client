@@ -11,7 +11,12 @@ import {Place} from '../../../api/types.ts';
 
 export type MainStackParamsList = {
   [MainStackScreens.MainScreen]: undefined;
-  [MainStackScreens.RouteScreen]: {destinationName: string; isSaved: boolean};
+  [MainStackScreens.RouteScreen]: {
+    destinationName: string;
+    isSaved: boolean;
+    dateStart?: Date;
+    dateEnd?: Date;
+  };
   [MainStackScreens.PlaceDetailsScreen]: {place: Place};
 };
 

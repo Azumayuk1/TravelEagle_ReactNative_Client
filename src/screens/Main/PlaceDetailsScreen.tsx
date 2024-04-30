@@ -1,6 +1,7 @@
 import React, {FC, useEffect} from 'react';
 import {
   Image,
+  Linking,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -30,11 +31,13 @@ const PlaceDetailsScreen: FC<PlaceDetailsScreenNavProps> = ({
   }, [navigation, place.name]);
 
   const onBuildRoutePressed = () => {
-    // TODO: Intent - external maps
+    Linking.openURL(
+      `https://www.google.com/maps/search/?api=1&query=${place.address}`,
+    );
   };
 
   const onOpenWebsitePressed = () => {
-    // TODO: Intent - open in browser
+    if (place.website) Linking.openURL(place.website);
   };
 
   return (
@@ -58,15 +61,17 @@ const PlaceDetailsScreen: FC<PlaceDetailsScreenNavProps> = ({
           />
         </View>
 
-        <View style={styles.section}>
-          <ChipInfo text={'Веб-сайт'} />
-          <Text style={styles.largeText}>{place.website}</Text>
-          <OutlinedButton
-            text={'Перейти'}
-            onPress={onOpenWebsitePressed}
-            icon={<IconOpenInNew />}
-          />
-        </View>
+        {place.website && (
+          <View style={styles.section}>
+            <ChipInfo text={'Веб-сайт'} />
+            <Text style={styles.largeText}>{place.website}</Text>
+            <OutlinedButton
+              text={'Перейти'}
+              onPress={onOpenWebsitePressed}
+              icon={<IconOpenInNew />}
+            />
+          </View>
+        )}
 
         <View style={styles.section}>
           <ChipInfo text={'О месте'} />
