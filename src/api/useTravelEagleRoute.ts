@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {RouteResponse} from './types.ts';
 import mockedJsonResponse from '../mockedData/mockedResponseSaintPetersburg.json';
+import { Platform } from "react-native";
 
 const useTravelEagleRoute = (
   city: string,
@@ -16,14 +17,20 @@ const useTravelEagleRoute = (
   useEffect(() => {
     const fetchRoute = async () => {
       try {
-        // Mocked response
         setIsRouteLoading(true);
-        await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate 2 seconds delay
-        // TODO: Real data
-        setRouteInfo(mockedJsonResponse);
+        const baseUrl = Platform.OS === 'android' ? 'http://10.0.2.2:8000' : 'http://localhost:8000';
+        const apiUrl = `${baseUrl}/get_full_route/?city_name=${encodeURIComponent(city)}`;
+
+        const response = await fetch(apiUrl);
+
+        console.log('Response:', response);
+        const responseData = await response.json();
+        console.log('Response JSON:', responseData);
+
+        setRouteInfo(responseData);
       } catch (error) {
         setError(`Ошибка: ${error}`);
-        console.log('Error:', error);
+        console.log('useTravelEagleRouteError:', error);
       } finally {
         setIsRouteLoading(false);
       }

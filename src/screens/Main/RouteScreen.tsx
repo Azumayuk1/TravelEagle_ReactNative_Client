@@ -11,7 +11,7 @@ import RoutePlaceholder from '../../components/Route/RoutePlaceholder.tsx';
 const RouteScreen: FC<RouteScreenNavProps> = ({route, navigation}) => {
   const {destinationName, isSaved, dateStart, dateEnd} = route.params;
 
-  const {routeInfo, isRouteLoading} = useTravelEagleRoute(destinationName);
+  const {routeInfo, isRouteLoading, error} = useTravelEagleRoute(destinationName);
 
   // Setting the city name in the header
   useEffect(() => {
@@ -21,7 +21,6 @@ const RouteScreen: FC<RouteScreenNavProps> = ({route, navigation}) => {
   }, [navigation, destinationName]);
 
   const navigateToPlaceDetails = (place: Place) => {
-    // TODO
     navigation.navigate(MainStackScreens.PlaceDetailsScreen, {place: place});
   };
 

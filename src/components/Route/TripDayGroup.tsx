@@ -11,7 +11,7 @@ interface Props {
   onPlacePressed: (place: Place) => void;
 }
 
-const keyExtractor = (item: Destination) => item.place.placeId;
+const keyExtractor = (item: Destination) => item.place.id;
 
 const TripDayGroup: FC<Props> = ({day, dayNumber, onPlacePressed}) => {
   const renderItem = ({item}: {item: Destination}) => {

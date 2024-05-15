@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   outlinedContainer: {
     borderWidth: 1,
     borderColor: colors.onSurfaceVariant,
+    alignItems: 'center',
   },
   outlinedText: {
     color: colors.onSurfaceVariant,
@@ -54,7 +55,10 @@ const styles = StyleSheet.create({
     marginRight: 4,
     textAlignVertical: 'center',
   },
-  filledContainer: {backgroundColor: colors.secondaryContainer},
+  filledContainer: {
+    backgroundColor: colors.secondaryContainer,
+    alignItems: 'center',
+  },
   filledText: {
     color: colors.generalFontColor,
     ...GlobalTextStyles.labelLarge,

@@ -23,14 +23,14 @@ const PlaceCard: FC<Props> = ({place, onPlacePressed, isEatery}) => {
           {isEatery ? 'Ресторан поблизости' : place.name}
         </Text>
         <Text style={styles.subtitle} numberOfLines={1}>
-          {isEatery ? place.name : entertainmentMap.get(place.type) || 'Место'}
+          {isEatery ? place.name : entertainmentMap.get(place.purpose_name) || 'Место'}
         </Text>
 
         <View style={styles.ratingContainer}>
           <View style={styles.rating}>
             <IconStar />
             <Text style={styles.ratingText} numberOfLines={1}>
-              {place.userRating + ' (' + place.userReviews + ')'}
+              {place.general_rating + ' (' + place.general_review_count + ')'}
             </Text>
           </View>
 
@@ -43,7 +43,7 @@ const PlaceCard: FC<Props> = ({place, onPlacePressed, isEatery}) => {
         </View>
       </View>
 
-      <Image source={{uri: place.imageUrl}} style={styles.image} />
+      <Image source={{uri: place.image}} style={styles.image} />
     </TouchableOpacity>
   );
 };
@@ -66,10 +66,11 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     flexDirection: 'column',
     justifyContent: 'space-between',
+    maxWidth: '80%'
   },
   image: {
     resizeMode: 'cover',
-    width: 110,
+    width: '20%',
     height: 100,
     borderBottomRightRadius: 16,
     borderTopRightRadius: 16,
@@ -87,6 +88,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 8,
+    maxWidth: '80%',
   },
   rating: {
     flexDirection: 'row',

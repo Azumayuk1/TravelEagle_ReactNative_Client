@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   outlinedContainer: {
     borderWidth: 1,
     borderColor: colors.primary,
+    alignItems: 'center',
   },
   outlinedText: {
     color: colors.primary,

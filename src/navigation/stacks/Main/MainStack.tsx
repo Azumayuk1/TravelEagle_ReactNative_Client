@@ -38,19 +38,19 @@ const MainStack: FC = () => {
       <MainStackNavigator.Screen
         name={MainStackScreens.MainScreen}
         component={MainScreen}
-        options={{headerShown: false}}
+        options={{headerShown: false, headerBackTitleVisible: false}}
       />
 
       <MainStackNavigator.Screen
         name={MainStackScreens.RouteScreen}
         component={RouteScreen}
-        options={{headerShown: true}}
+        options={{headerShown: true, headerBackTitleVisible: false}}
       />
 
       <MainStackNavigator.Screen
         name={MainStackScreens.PlaceDetailsScreen}
         component={PlaceDetailsScreen}
-        options={{headerShown: true}}
+        options={{headerShown: true, headerBackTitleVisible: false}}
       />
     </MainStackNavigator.Navigator>
   );

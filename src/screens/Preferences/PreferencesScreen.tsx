@@ -79,59 +79,61 @@ const PreferencesScreen: FC = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <AuthWithGoogle />
-      <Text style={styles.sectionTitle}>Как планируете добираться?</Text>
-      <View style={styles.transportationTypeSection}>
-        <TransportationSelector
-          switchOptions={switchOptions}
-          transportationModeSelected={transportationModeByCarSelected}
-          setTransportationModeSelected={setTransportationModeByCarSelected}
+      <View style={styles.safeAreaView}>
+        <AuthWithGoogle />
+        <Text style={styles.sectionTitle}>Как планируете добираться?</Text>
+        <View style={styles.transportationTypeSection}>
+          <TransportationSelector
+            switchOptions={switchOptions}
+            transportationModeSelected={transportationModeByCarSelected}
+            setTransportationModeSelected={setTransportationModeByCarSelected}
+          />
+        </View>
+
+        <Text style={styles.sectionTitle}>Что вас не интересует?</Text>
+        <View style={styles.dislikesSection}>
+          <ChipWithIcon
+            text={'Добавить игнорируемые места'}
+            onPress={() => setModalVisibleIgnoredPlaces(true)}
+            icon={<IconPlus />}
+            filled={true}
+          />
+          <ListRemovablePlaceTypes
+            placeTypes={ignoredPlaces}
+            onRemovePlacePressed={onRemoveIgnoredPlace}
+          />
+        </View>
+
+        <Text style={styles.sectionTitle}>Что вам особенно интересно?</Text>
+        <View style={styles.likesSection}>
+          <ChipWithIcon
+            text={'Добавить интересные места'}
+            onPress={() => setModalVisiblePreferredPlaces(true)}
+            icon={<IconPlus />}
+            filled={true}
+          />
+          <ListRemovablePlaceTypes
+            placeTypes={preferredPlaces}
+            onRemovePlacePressed={onRemovePreferredPlace}
+          />
+        </View>
+
+        <ModalAddPlacesToCategory
+          isVisible={modalVisibleIgnoredPlaces}
+          onCloseRequested={() => setModalVisibleIgnoredPlaces(false)}
+          placeTypesList={allAvailablePlaceTypes}
+          onAddPlaceType={onAddIgnoredPlace}
+          title={'Добавьте неинтересные места'}
+        />
+
+        <ModalAddPlacesToCategory
+          isVisible={modalVisiblePreferredPlaces}
+          onCloseRequested={() => setModalVisiblePreferredPlaces(false)}
+          placeTypesList={allAvailablePlaceTypes}
+          onAddPlaceType={onAddPreferredPlace}
+          title={'Добавьте наиболее интересные места'}
         />
       </View>
-
-      <Text style={styles.sectionTitle}>Что вас не интересует?</Text>
-      <View style={styles.dislikesSection}>
-        <ChipWithIcon
-          text={'Добавить игнорируемые места'}
-          onPress={() => setModalVisibleIgnoredPlaces(true)}
-          icon={<IconPlus />}
-          filled={true}
-        />
-        <ListRemovablePlaceTypes
-          placeTypes={ignoredPlaces}
-          onRemovePlacePressed={onRemoveIgnoredPlace}
-        />
-      </View>
-
-      <Text style={styles.sectionTitle}>Что вам особенно интересно?</Text>
-      <View style={styles.likesSection}>
-        <ChipWithIcon
-          text={'Добавить интересные места'}
-          onPress={() => setModalVisiblePreferredPlaces(true)}
-          icon={<IconPlus />}
-          filled={true}
-        />
-        <ListRemovablePlaceTypes
-          placeTypes={preferredPlaces}
-          onRemovePlacePressed={onRemovePreferredPlace}
-        />
-      </View>
-
-      <ModalAddPlacesToCategory
-        isVisible={modalVisibleIgnoredPlaces}
-        onCloseRequested={() => setModalVisibleIgnoredPlaces(false)}
-        placeTypesList={allAvailablePlaceTypes}
-        onAddPlaceType={onAddIgnoredPlace}
-        title={'Добавьте неинтересные места'}
-      />
-
-      <ModalAddPlacesToCategory
-        isVisible={modalVisiblePreferredPlaces}
-        onCloseRequested={() => setModalVisiblePreferredPlaces(false)}
-        placeTypesList={allAvailablePlaceTypes}
-        onAddPlaceType={onAddPreferredPlace}
-        title={'Добавьте наиболее интересные места'}
-      />
     </SafeAreaView>
   );
 };
@@ -140,8 +142,12 @@ const styles = StyleSheet.create({
   safeArea: {
     backgroundColor: colors.screenBackground,
     flex: 1,
-    padding: 16,
+  },
+  safeAreaView: {
+    flex: 1,
     flexDirection: 'column',
+    padding: 16,
+    backgroundColor: colors.screenBackground,
   },
   sectionTitle: {
     paddingVertical: 12,

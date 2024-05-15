@@ -19,14 +19,14 @@ type Destination = {
 };
 
 type Place = {
-  placeId: string;
+  id: string;
   name: string;
-  type: string;
-  imageUrl: string;
-  userRating: number;
-  userReviews: number;
+  purpose_name: string;
+  image: string;
+  general_rating: number;
+  general_review_count: number;
   likes: number;
-  website?: string;
+  url?: string;
   description?: string;
   address: string;
 };

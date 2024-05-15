@@ -122,56 +122,58 @@ const MainScreen: FC = () => {
 
   return (
     <SafeAreaView style={styles.safeArea}>
-      <GenericSearchBar
-        value={searchText}
-        onChangeText={setSearchText}
-        placeholderText={'Поиск в TravelEagle'}
-        onSubmit={onSubmitSearch}
-      />
-      <View style={styles.dateChips}>
-        <ChipWithIcon
-          text={'Даты'}
-          onPress={() => setCalendarModalVisible(true)}
-          icon={<IconDate />}
+      <View style={styles.safeAreaView}>
+        <GenericSearchBar
+          value={searchText}
+          onChangeText={setSearchText}
+          placeholderText={'Поиск в TravelEagle'}
+          onSubmit={onSubmitSearch}
+        />
+        <View style={styles.dateChips}>
+          <ChipWithIcon
+            text={'Даты'}
+            onPress={() => setCalendarModalVisible(true)}
+            icon={<IconDate />}
+          />
+
+          {userSelectedDates && (
+            <ChipWithIcon
+              text={
+                getShortDate(convertCalendarDateStringToDate(startDateText)) +
+                ' - ' +
+                getShortDate(convertCalendarDateStringToDate(endDateText))
+              }
+              onPress={() => setUserSelectedDates(false)}
+              icon={<IconClose />}
+              style={styles.selectedDateChip}
+            />
+          )}
+        </View>
+
+        <Text style={styles.whereToText}>Куда отправимся?</Text>
+
+        <CitySuggestionBlock
+          citySuggestionsList={mockedCitySuggestions}
+          title={'Может быть...'}
+          onCityCardPressed={onCitySuggestionPressed}
         />
 
-        {userSelectedDates && (
-          <ChipWithIcon
-            text={
-              getShortDate(convertCalendarDateStringToDate(startDateText)) +
-              ' - ' +
-              getShortDate(convertCalendarDateStringToDate(endDateText))
-            }
-            onPress={() => setUserSelectedDates(false)}
-            icon={<IconClose />}
-            style={styles.selectedDateChip}
-          />
-        )}
+        <View style={{height: 16}}></View>
+
+        <CitySuggestionBlock
+          citySuggestionsList={mockedCitySuggestions2}
+          title={'Недалеко от вас'}
+          onCityCardPressed={onCitySuggestionPressed}
+        />
+
+        <DateRangeCalendar
+          isVisible={calendarModalVisible}
+          onCloseRequested={() => setCalendarModalVisible(false)}
+          markedDates={markedDates}
+          onDayPress={onDayPressed}
+          onSubmit={onDatesSelected}
+        />
       </View>
-
-      <Text style={styles.whereToText}>Куда отправимся?</Text>
-
-      <CitySuggestionBlock
-        citySuggestionsList={mockedCitySuggestions}
-        title={'Может быть...'}
-        onCityCardPressed={onCitySuggestionPressed}
-      />
-
-      <View style={{height: 16}}></View>
-
-      <CitySuggestionBlock
-        citySuggestionsList={mockedCitySuggestions2}
-        title={'Недалеко от вас'}
-        onCityCardPressed={onCitySuggestionPressed}
-      />
-
-      <DateRangeCalendar
-        isVisible={calendarModalVisible}
-        onCloseRequested={() => setCalendarModalVisible(false)}
-        markedDates={markedDates}
-        onDayPress={onDayPressed}
-        onSubmit={onDatesSelected}
-      />
     </SafeAreaView>
   );
 };
@@ -180,8 +182,12 @@ const styles = StyleSheet.create({
   safeArea: {
     backgroundColor: colors.screenBackground,
     flex: 1,
-    padding: 16,
+  },
+  safeAreaView: {
+    flex: 1,
     flexDirection: 'column',
+    padding: 16,
+    backgroundColor: colors.screenBackground,
   },
   dateChips: {
     flexDirection: 'row',

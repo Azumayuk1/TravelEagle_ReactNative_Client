@@ -10,7 +10,7 @@ interface Props {
   onPlacePressed: (place: Place) => void;
 }
 
-const keyExtractor = (item: TripDay) => item.destinations[0].place.placeId;
+const keyExtractor = (item: TripDay) => item.destinations[0].place.id;
 
 const RouteFull: FC<Props> = ({route, onPlacePressed}) => {
   const renderItem = ({item, index}: {item: TripDay; index: number}) => {
@@ -25,9 +25,9 @@ const RouteFull: FC<Props> = ({route, onPlacePressed}) => {
 
   return (
     <View>
-      <WeatherMessage weatherInfo={route.weatherWarning}></WeatherMessage>
+      {route ? <WeatherMessage weatherInfo={route.weatherWarning}></WeatherMessage> : <></>}
       <FlatList
-        data={route.tripDays}
+        data={route ? route.tripDays : []}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         scrollEnabled={false}

@@ -1,4 +1,4 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {
   Image,
   Linking,
@@ -16,12 +16,16 @@ import {GlobalTextStyles} from '../../globalStyles/globalTextStyles.ts';
 import OutlinedButton from '../../components/generic/OutlinedButton.tsx';
 import IconMap from '../../components/icons/IconMap.tsx';
 import IconOpenInNew from '../../components/icons/IconOpenInNew.tsx';
+import {handleLikePlace} from '../../api/likePlace.ts';
+import IconLike from '../../components/icons/IconLike.tsx';
 
 const PlaceDetailsScreen: FC<PlaceDetailsScreenNavProps> = ({
   route,
   navigation,
 }) => {
   const place = route.params.place;
+
+  const [userLiked, setUserLiked] = useState(false);
 
   // Setting the city name in the header
   useEffect(() => {
@@ -37,7 +41,7 @@ const PlaceDetailsScreen: FC<PlaceDetailsScreenNavProps> = ({
   };
 
   const onOpenWebsitePressed = () => {
-    if (place.website) Linking.openURL(place.website);
+    if (place.url) Linking.openURL(place.url);
   };
 
   return (
@@ -45,10 +49,24 @@ const PlaceDetailsScreen: FC<PlaceDetailsScreenNavProps> = ({
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollView}>
-        <Image style={styles.image} source={{uri: place.imageUrl}} />
+        <Image style={styles.image} source={{uri: place.image}} />
 
         <View style={styles.section}>
           <ChipInfo text={getPlaceTypeTranslation(place)} />
+        </View>
+
+        <View style={styles.section}>
+          <OutlinedButton
+            text={userLiked ? `${place.likes + 1}` : `${place.likes}`}
+            onPress={() => {
+              if (!userLiked) {
+                handleLikePlace(place.id);
+                setUserLiked(true);
+              } else {
+              }
+            }}
+            icon={<IconLike />}
+          />
         </View>
 
         <View style={styles.section}>
@@ -61,10 +79,10 @@ const PlaceDetailsScreen: FC<PlaceDetailsScreenNavProps> = ({
           />
         </View>
 
-        {place.website && (
+        {place.url && (
           <View style={styles.section}>
             <ChipInfo text={'Веб-сайт'} />
-            <Text style={styles.largeText}>{place.website}</Text>
+            <Text style={styles.largeText}>{place.url}</Text>
             <OutlinedButton
               text={'Перейти'}
               onPress={onOpenWebsitePressed}
